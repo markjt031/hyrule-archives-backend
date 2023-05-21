@@ -2,7 +2,6 @@ const router = require('express').Router();
 const { creatureCtrls }= require('../controllers')
 const upload= require('../services/fileUpload')
 
-console.log(upload)
 
 router.get('/', creatureCtrls.getAllCreatures)
 router.get('/:id', creatureCtrls.getOneCreature)

@@ -1,3 +1,4 @@
 module.exports = {
-    creatureCtrls: require('./creatureCtrls')
+    creatureCtrls: require('./creatureCtrls'),
+    monsterCtrls: require('./monsterCtrls')
 }

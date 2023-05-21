@@ -12,5 +12,6 @@ mongoose.connect(MONGODB_URI, {
   .on("error", (error) => console.log(error));
 
   module.exports={
-    Creature: require('./creature')
+    Creature: require('./creature'),
+    Monster: require('./monster')
   }
