@@ -13,5 +13,6 @@ mongoose.connect(MONGODB_URI, {
 
   module.exports={
     Creature: require('./creature'),
-    Monster: require('./monster')
+    Monster: require('./monster'),
+    Material: require('./material')
   }
