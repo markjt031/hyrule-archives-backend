@@ -7,7 +7,7 @@ console.log(upload)
 router.get('/')
 router.get('/:id')
 router.post('/', upload.single('image'), creatureCtrls.createCreature)
-router.delete('/:id')
-router.put('/:id')
+router.delete('/:id', creatureCtrls.deleteCreature)
+router.put('/:id', upload.single('image'), creatureCtrls.updateCreature)
 
 module.exports = router;
