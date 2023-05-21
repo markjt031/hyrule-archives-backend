@@ -4,8 +4,8 @@ const upload= require('../services/fileUpload')
 
 console.log(upload)
 
-router.get('/')
-router.get('/:id')
+router.get('/', creatureCtrls.getAllCreatures)
+router.get('/:id', creatureCtrls.getOneCreature)
 router.post('/', upload.single('image'), creatureCtrls.createCreature)
 router.delete('/:id', creatureCtrls.deleteCreature)
 router.put('/:id', upload.single('image'), creatureCtrls.updateCreature)

@@ -1,6 +1,26 @@
 const db=require('../models')
 
+const getAllCreatures=(req, res)=>{
+    db.Creature.find({}).then((foundCreatures)=>{
+        if (!foundCreatures){
+            res.status(404).json({message: 'Creatures not found'})
+        }
+        else{
+            res.status(200).json({data: foundCreatures})
+        }
+    })
+}
 
+const getOneCreature=(req, res)=>{
+    db.Creature.findOne({_id: req.params.id}).then((foundCreature)=>{
+        if (!foundCreature){
+            res.status(404).json({message: 'Could not find creature'})
+        }
+        else{
+            res.status(200).json({data: foundCreature})
+        }
+    })
+}
 const createCreature=(req, res)=>{
     if (req.file){
         req.body.image=req.file.location;
@@ -44,5 +64,7 @@ const updateCreature=(req, res)=>{
 module.exports={
     createCreature,
     deleteCreature,
-    updateCreature
+    updateCreature,
+    getAllCreatures,
+    getOneCreature
 }
