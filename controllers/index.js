@@ -1,5 +1,6 @@
 module.exports = {
     creatureCtrls: require('./creatureCtrls'),
     monsterCtrls: require('./monsterCtrls'),
-    materialCtrls: require('./materialCtrls')
+    materialCtrls: require('./materialCtrls'),
+    equipmentCtrls: require('./equipmentCtrls')
 }
