@@ -1,5 +1,6 @@
 const db=require('../models')
 
+
 const getAllCreatures=(req, res)=>{
     db.Creature.find({}).then((foundCreatures)=>{
         if (!foundCreatures){
