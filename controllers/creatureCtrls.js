@@ -23,6 +23,7 @@ const getOneCreature=(req, res)=>{
     })
 }
 const createCreature=(req, res)=>{
+    req.body.userId=req.session.currentUser
     if (req.file){
         req.body.image=req.file.location;
     }

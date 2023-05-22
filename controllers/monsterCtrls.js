@@ -22,6 +22,7 @@ const getOneMonster=(req, res)=>{
     })
 }
 const createMonster=(req, res)=>{
+    req.body.userId=req.session.currentUser
     if (req.file){
         req.body.image=req.file.location;
     }

@@ -22,6 +22,7 @@ const getOneEquipment=(req, res)=>{
     })
 }
 const createEquipment=(req, res)=>{
+    req.body.userId=req.session.currentUser
     if (req.file){
         req.body.image=req.file.location;
     }

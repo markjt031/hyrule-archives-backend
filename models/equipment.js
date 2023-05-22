@@ -15,6 +15,7 @@ const EquipmentSchema= new mongoose.Schema({
     commonLocations: [{type: String}],
     description: {type: String},
     image: {type: String},
+    userId: {type: String}
 }, {timestamps: true})
 
 const Equipment= mongoose.model("Equipment", EquipmentSchema)

@@ -22,6 +22,7 @@ const getOneMaterial=(req, res)=>{
     })
 }
 const createMaterial=(req, res)=>{
+    req.body.userId=req.session.currentUser
     if (req.file){
         req.body.image=req.file.location;
     }
