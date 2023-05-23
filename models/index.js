@@ -16,5 +16,6 @@ mongoose.connect(MONGODB_URI, {
     Monster: require('./monster'),
     Material: require('./material'),
     Equipment: require('./equipment'),
+    Critter: require('./critter'),
     User: require('./user')
   }
