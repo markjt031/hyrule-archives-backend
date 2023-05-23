@@ -10,7 +10,7 @@ router.use('/creatures', creatureRoutes)
 router.use('/monsters', monsterRoutes)
 router.use('/items/materials', materialRoutes)
 router.use('/items/equipment', equipmentRoutes)
-router.use('/creatures/critters', critterRoutes)
+router.use('/critters', critterRoutes)
 router.use('/users', userRoutes)
 
 

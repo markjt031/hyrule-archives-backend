@@ -52,13 +52,22 @@ const getProfile=(req, res)=>{
             }
         },
         {
+            $lookup: {
+                from: "critters",
+                localField: "_id",
+                foreignField: "userId",
+                as: "Critters"
+            }
+        },
+        {
             $project: { 
                 username: 1,
                 email: 1,
                 creatures: 1,
                 monsters: 1,
                 equipment: 1,
-                materials: 1
+                materials: 1,
+                critters: 1
             }
         }
     ]).then((data)=>{
