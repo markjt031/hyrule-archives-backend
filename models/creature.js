@@ -7,7 +7,7 @@ const CreatureSchema= new mongoose.Schema({
     commonLocations: [{type: String}],
     description: {type: String},
     image: {type: String},
-    userId: {type: String}
+    userId: {type: mongoose.Types.ObjectId}
 }, {timestamps: true})
 
 const Creature= mongoose.model("Creature", CreatureSchema)

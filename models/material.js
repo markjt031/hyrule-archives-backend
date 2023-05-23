@@ -19,7 +19,7 @@ const MaterialSchema= new mongoose.Schema({
     commonLocations: [{type: String}],
     description: {type: String},
     image: {type: String},
-    userId: {type: String}
+    userId: {type: mongoose.Types.ObjectId}
 }, {timestamps: true})
 
 const Material= mongoose.model("Material", MaterialSchema)
