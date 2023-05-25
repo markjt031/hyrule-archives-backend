@@ -25,7 +25,7 @@ app.use('/', routes)
 
 
 app.get('/', (req, res)=>{
-    res.send('Testing')
+    res.sendFile(__dirname +"/index.html")
 })
 
 app.use((req, res) => {res.status(404).json({message: "NOT A PROPER ROUTE"})})
