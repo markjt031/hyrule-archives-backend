@@ -1,7 +1,7 @@
 const db=require('../models')
 
 const getAllCritters=(req, res)=>{
-    db.Critter.find({}).then((foundCritters)=>{
+    db.Critter.find({}).sort({no: 1}).then((foundCritters)=>{
         if (!foundCritters){
             res.status(404).json({message: 'Critters not found'})
         }

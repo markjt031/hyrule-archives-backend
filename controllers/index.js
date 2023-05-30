@@ -4,5 +4,6 @@ module.exports = {
     materialCtrls: require('./materialCtrls'),
     equipmentCtrls: require('./equipmentCtrls'),
     critterCtrls: require('./critterCtrls'),
-    userCtrls: require('./userCtrls')
+    userCtrls: require('./userCtrls'),
+    searchCtrls: require('./searchCtrl')
 }

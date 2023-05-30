@@ -1,7 +1,7 @@
 const db=require('../models')
 
 const getAllMaterials=(req, res)=>{
-    db.Material.find({}).then((foundMaterials)=>{
+    db.Material.find({}).sort({no: 1}).then((foundMaterials)=>{
         if (!foundMaterials){
             res.status(404).json({message: 'Materials not found'})
         }

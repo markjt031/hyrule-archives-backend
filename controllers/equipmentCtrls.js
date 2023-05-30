@@ -1,7 +1,7 @@
 const db=require('../models')
 
 const getAllEquipment=(req, res)=>{
-    db.Equipment.find({}).then((foundEquipment)=>{
+    db.Equipment.find({}).sort({no: 1}).then((foundEquipment)=>{
         if (!foundEquipment){
             res.status(404).json({message: 'Equipment not found'})
         }

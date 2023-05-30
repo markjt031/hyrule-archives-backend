@@ -1,7 +1,7 @@
 const db=require('../models')
 
 const getAllMonsters=(req, res)=>{
-    db.Monster.find({}).then((foundMonsters)=>{
+    db.Monster.find({}).sort({no: 1}).then((foundMonsters)=>{
         if (!foundMonsters){
             res.status(404).json({message: 'Monsters not found'})
         }

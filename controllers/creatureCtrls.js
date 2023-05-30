@@ -3,7 +3,7 @@ const mongoose=require('mongoose')
 
 
 const getAllCreatures=(req, res)=>{
-    db.Creature.find({}).then((foundCreatures)=>{
+    db.Creature.find({}).sort({no: 1}).then((foundCreatures)=>{
         if (!foundCreatures){
             res.status(404).json({message: 'Creatures not found'})
         }
