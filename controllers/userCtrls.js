@@ -80,10 +80,11 @@ const getProfile=(req, res)=>{
                 username: 1,
                 email: 1,
                 creatures: 1,
+                critters: 1,
                 monsters: 1,
                 equipment: 1,
-                materials: 1,
-                critters: 1
+                materials: 1
+                
             }
         }
     ]).then((data)=>{
