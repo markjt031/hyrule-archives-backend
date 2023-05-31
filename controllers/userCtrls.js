@@ -50,21 +50,21 @@ const getProfile=(req, res)=>{
                 from: "monsters",
                 localField: "_id",
                 foreignField: "userId",
-                as: "Monsters"
+                as: "monsters"
             }
         }, {
             $lookup: {
                 from: "materials",
                 localField: "_id",
                 foreignField: "userId",
-                as: "Materials"
+                as: "materials"
             }
         }, {
             $lookup: {
                 from: "equipment",
                 localField: "_id",
                 foreignField: "userId",
-                as: "Equipment"
+                as: "equipment"
             }
         },
         {
@@ -72,7 +72,7 @@ const getProfile=(req, res)=>{
                 from: "critters",
                 localField: "_id",
                 foreignField: "userId",
-                as: "Critters"
+                as: "critters"
             }
         },
         {
