@@ -19,6 +19,17 @@ const register=(req, res)=>{
 
     
 }
+const getUsers=(req,res)=>{
+    User.find({}, {username:1, _id:1}).sort({no: 1}).then((foundUsers)=>{
+        if (!foundUsers){
+            res.status(404).json({message: 'Users not found'})
+        }
+        else{
+            res.status(200).json({data: foundUsers})
+        }
+    })
+    
+}
 const getProfile=(req, res)=>{
     User.aggregate([
         {
@@ -109,5 +120,6 @@ module.exports={
     login,
     register,
     getProfile,
+    getUsers,
     logout
 }
