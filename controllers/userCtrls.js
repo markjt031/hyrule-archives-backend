@@ -91,7 +91,7 @@ const getProfile=(req, res)=>{
         if (!data){
             res.status(404).json({message: "not found"})
         }
-        else res.status(200).json(data)
+        else res.status(200).json(...data)
     })
 }
 const login=(req, res)=>{
