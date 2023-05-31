@@ -5,17 +5,22 @@ const User = require('../models/user.js')
 
 const register=(req, res)=>{
     req.body.password=bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10))
-    db.User.create(req.body).then((createdUser)=>{
+    User.create(req.body).then((createdUser)=>{
         if (!createdUser){
             res.status(400).json({message: "Could not create"})
         }
         else{
             res.status(201).json({data: createdUser, message: "User created"})
         }
+    }).catch(err=>{
+        console.log(err)
+        res.status(400).json({message: "User already exists"})
     })
+
+    
 }
 const getProfile=(req, res)=>{
-    db.User.aggregate([
+    User.aggregate([
         {
             $match: {
                 _id: new mongoose.Types.ObjectId(req.params.id)
@@ -78,7 +83,7 @@ const getProfile=(req, res)=>{
     })
 }
 const login=(req, res)=>{
-    db.User.findOne({username: req.body.username}).then((foundUser)=>{
+    User.findOne({username: req.body.username}).then((foundUser)=>{
         if (!foundUser){
             res.status(404).json({message: "user not found"})
         }
