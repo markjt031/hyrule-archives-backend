@@ -85,8 +85,7 @@ const login=(req, res)=>{
         else{
             if (bcrypt.compareSync(req.body.password, foundUser.password)){
                 req.session.currentUser=foundUser
-                console.log(foundUser)
-                res.status(200).json({username: foundUser.username})
+                res.status(200).json({username: foundUser.username, id: foundUser.id, email: foundUser.email})
             }
             else{
                 res.staus(400).json({message: "username and password do not match"})

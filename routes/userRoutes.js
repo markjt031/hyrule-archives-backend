@@ -3,7 +3,7 @@ const { userCtrls }= require('../controllers')
 
 
 
-router.post('/', userCtrls.register)
+router.post('/register', userCtrls.register)
 router.post('/login', userCtrls.login)
 router.get('/logout', userCtrls.logout)
 router.get('/profile/:id', userCtrls.getProfile)
