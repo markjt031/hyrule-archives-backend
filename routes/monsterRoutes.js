@@ -7,7 +7,7 @@ const isAuthenticated=require('../middleware/isAuthenticated')
 router.get('/', monsterCtrls.getAllMonsters)
 router.get('/:id', monsterCtrls.getOneMonster)
 router.post('/', upload.single('image'), monsterCtrls.createMonster)
-router.delete('/:id', isAuthenticated, monsterCtrls.deleteMonster)
-router.put('/:id', isAuthenticated, upload.single('image'), monsterCtrls.updateMonster)
+router.delete('/:id', monsterCtrls.deleteMonster)
+router.put('/:id', upload.single('image'), monsterCtrls.updateMonster)
 
 module.exports = router;
