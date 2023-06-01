@@ -1,4 +1,5 @@
 const db=require('../models')
+const mongoose=require('mongoose')
 
 const getAllEquipment=(req, res)=>{
     db.Equipment.find({}).sort({no: 1}).then((foundEquipment)=>{
@@ -22,7 +23,8 @@ const getOneEquipment=(req, res)=>{
     })
 }
 const createEquipment=(req, res)=>{
-    req.body.userId=req.session.currentUser
+    // req.body.userId=req.session.currentUser
+    req.body.userId=new mongoose.Types.ObjectId(req.body.userId)
     if (req.file){
         req.body.image=req.file.location;
     }

@@ -24,7 +24,8 @@ const getOneCreature=(req, res)=>{
     })
 }
 const createCreature=(req, res)=>{
-    req.body.userId=req.session.currentUser
+    // req.body.userId=req.session.currentUser
+    req.body.userId=new mongoose.Types.ObjectId(req.body.userId)
     if (req.file){
         req.body.image=req.file.location;
     }

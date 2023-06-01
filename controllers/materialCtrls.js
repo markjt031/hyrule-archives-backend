@@ -1,4 +1,5 @@
 const db=require('../models')
+const mongoose=require('mongoose')
 
 const getAllMaterials=(req, res)=>{
     db.Material.find({}).sort({no: 1}).then((foundMaterials)=>{
@@ -22,7 +23,8 @@ const getOneMaterial=(req, res)=>{
     })
 }
 const createMaterial=(req, res)=>{
-    req.body.userId=req.session.currentUser
+    // req.body.userId=req.session.currentUser
+    req.body.userId=new mongoose.Types.ObjectId(req.body.userId)
     if (req.file){
         req.body.image=req.file.location;
     }
