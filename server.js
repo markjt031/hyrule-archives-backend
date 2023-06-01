@@ -15,12 +15,19 @@ const corsOptions ={
 app.use(express.urlencoded({extended: true}))
 app.use(express.json())
 
-app.use(cors(corsOptions))
+
 app.use(session({
     secret: process.env.SECRET,
     resave: false,
     saveUninitialized: false,
+    cookie:{
+        sameSite: 'none',
+        httpOnly: false,
+        secure: true,
+        expires: 60000
+    }
 }))
+app.use(cors(corsOptions))
 
 app.use('/', routes)
 

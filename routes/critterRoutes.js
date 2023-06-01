@@ -7,7 +7,7 @@ const isAuthenticated=require('../middleware/isAuthenticated')
 router.get('/', critterCtrls.getAllCritters)
 router.get('/:id', critterCtrls.getOneCritter)
 router.post('/', upload.single('image'), critterCtrls.createCritter)
-router.delete('/:id', isAuthenticated, critterCtrls.deleteCritter)
-router.put('/:id', isAuthenticated, upload.single('image'), critterCtrls.updateCritter)
+router.delete('/:id', critterCtrls.deleteCritter)
+router.put('/:id', upload.single('image'), critterCtrls.updateCritter)
 
 module.exports = router;

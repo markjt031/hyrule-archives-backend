@@ -6,7 +6,7 @@ const isAuthenticated=require('../middleware/isAuthenticated')
 router.get('/', equipmentCtrls.getAllEquipment)
 router.get('/:id', equipmentCtrls.getOneEquipment)
 router.post('/', upload.single('image'), equipmentCtrls.createEquipment)
-router.delete('/:id', isAuthenticated, equipmentCtrls.deleteEquipment)
-router.put('/:id', isAuthenticated, upload.single('image'), equipmentCtrls.updateEquipment)
+router.delete('/:id', equipmentCtrls.deleteEquipment)
+router.put('/:id', upload.single('image'), equipmentCtrls.updateEquipment)
 
 module.exports = router;
