@@ -2,6 +2,7 @@ const db=require('../models')
 const mongoose=require('mongoose')
 const bcrypt = require('bcrypt')
 const User = require('../models/user.js')
+const jwt=require('jsonwebtoken')
 
 const register=(req, res)=>{
     req.body.password=bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10))
@@ -105,7 +106,7 @@ const login=(req, res)=>{
                 res.status(200).json({username: foundUser.username, id: foundUser.id, email: foundUser.email})
             }
             else{
-                res.staus(400).json({message: "username and password do not match"})
+                res.status(400).json({message: "username and password do not match"})
             }
         }
     })
