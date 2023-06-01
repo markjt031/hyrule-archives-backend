@@ -1,4 +1,5 @@
 const db=require('../models')
+const mongoose=require('mongoose')
 
 const getAllMonsters=(req, res)=>{
     db.Monster.find({}).sort({no: 1}).then((foundMonsters)=>{
@@ -22,7 +23,8 @@ const getOneMonster=(req, res)=>{
     })
 }
 const createMonster=(req, res)=>{
-    req.body.userId=req.session.currentUser
+    // req.body.userId=req.session.currentUser
+    req.body.userId=new mongoose.Types.ObjectId(req.body.userId)
     if (req.file){
         req.body.image=req.file.location;
     }
