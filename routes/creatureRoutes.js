@@ -6,7 +6,7 @@ const isAuthenticated=require('../middleware/isAuthenticated')
 
 router.get('/', creatureCtrls.getAllCreatures)
 router.get('/:id', creatureCtrls.getOneCreature)
-router.post('/', isAuthenticated, upload.single('image'), creatureCtrls.createCreature)
+router.post('/', upload.single('image'), creatureCtrls.createCreature)
 router.delete('/:id', isAuthenticated, creatureCtrls.deleteCreature)
 router.put('/:id', isAuthenticated, upload.single('image'), creatureCtrls.updateCreature)
 

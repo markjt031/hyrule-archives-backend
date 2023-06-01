@@ -34,6 +34,9 @@ const createEquipment=(req, res)=>{
             console.log(result)
             res.status(201).json(result)
         }
+    }).catch(err=>{
+        console.log(err)
+        res.status(400).json({message: "equipment already exists"})
     })
 }
 const deleteEquipment=(req, res)=>{

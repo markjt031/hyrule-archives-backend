@@ -34,6 +34,9 @@ const createCritter=(req, res)=>{
             console.log(result)
             res.status(201).json(result)
         }
+    }).catch(err=>{
+        console.log(err)
+        res.status(400).json({message: "critter already exists"})
     })
 }
 const deleteCritter=(req, res)=>{

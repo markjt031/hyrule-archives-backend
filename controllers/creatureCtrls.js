@@ -36,6 +36,9 @@ const createCreature=(req, res)=>{
             console.log(result)
             res.status(201).json(result)
         }
+    }).catch(err=>{
+        console.log(err)
+        res.status(400).json({message: "creature already exists"})
     })
 }
 const deleteCreature=(req, res)=>{

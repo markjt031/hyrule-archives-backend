@@ -19,8 +19,9 @@ app.use(cors(corsOptions))
 app.use(session({
     secret: process.env.SECRET,
     resave: false,
-    saveUninitialized: false
+    saveUninitialized: false,
 }))
+
 app.use('/', routes)
 
 
