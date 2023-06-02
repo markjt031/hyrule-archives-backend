@@ -30,7 +30,7 @@ const createMonster=(req, res)=>{
     }
     db.Monster.create(req.body).then((result)=>{
         if(!result){
-            res.statue(400).json({message: 'Could not create'})
+            res.status(400).json({message: 'Could not create'})
         }
         else{
             console.log(result)
@@ -43,7 +43,7 @@ const createMonster=(req, res)=>{
 }
 const deleteMonster=(req, res)=>{
     db.Monster.findByIdAndDelete(req.params.id).then((deletedMonster=>{
-        if (!deleteMonster){
+        if (!deletedMonster){
             res.status(400).json({message: "Could not delete"})
         }
         else{
@@ -54,10 +54,10 @@ const deleteMonster=(req, res)=>{
 
 const updateMonster=(req, res)=>{
     if (req.file){
-        req.file.image=req.file.location
+        req.body.image=req.file.location
     }
     db.Monster.findByIdAndUpdate(req.params.id, req.body, {new: true}).then((updatedMonster)=>{
-        if (!updateMonster){
+        if (!updatedMonster){
             res.status(400).json({message: "Could not update"})
         }
         else{

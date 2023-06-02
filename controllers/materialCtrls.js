@@ -43,7 +43,7 @@ const createMaterial=(req, res)=>{
 }
 const deleteMaterial=(req, res)=>{
     db.Material.findByIdAndDelete(req.params.id).then((deletedMaterial=>{
-        if (!deleteMaterial){
+        if (!deletedMaterial){
             res.status(400).json({message: "Could not delete"})
         }
         else{
@@ -54,10 +54,10 @@ const deleteMaterial=(req, res)=>{
 
 const updateMaterial=(req, res)=>{
     if (req.file){
-        req.file.image=req.file.location
+        req.body.image=req.file.location
     }
     db.Material.findByIdAndUpdate(req.params.id, req.body, {new: true}).then((updatedMaterial)=>{
-        if (!updateMaterial){
+        if (!updatedMaterial){
             res.status(400).json({message: "Could not update"})
         }
         else{

@@ -43,7 +43,7 @@ const createEquipment=(req, res)=>{
 }
 const deleteEquipment=(req, res)=>{
     db.Equipment.findByIdAndDelete(req.params.id).then((deletedEquipment=>{
-        if (!deleteEquipment){
+        if (!deletedEquipment){
             res.status(400).json({message: "Could not delete"})
         }
         else{
@@ -54,10 +54,10 @@ const deleteEquipment=(req, res)=>{
 
 const updateEquipment=(req, res)=>{
     if (req.file){
-        req.file.image=req.file.location
+        req.body.image=req.file.location
     }
     db.Equipment.findByIdAndUpdate(req.params.id, req.body, {new: true}).then((updatedEquipment)=>{
-        if (!updateEquipment){
+        if (!updatedEquipment){
             res.status(400).json({message: "Could not update"})
         }
         else{

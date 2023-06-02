@@ -44,7 +44,7 @@ const createCreature=(req, res)=>{
 }
 const deleteCreature=(req, res)=>{
     db.Creature.findByIdAndDelete(req.params.id).then((deletedCreature=>{
-        if (!deleteCreature){
+        if (!deletedCreature){
             res.status(400).json({message: "Could not delete"})
         }
         else{
@@ -55,10 +55,10 @@ const deleteCreature=(req, res)=>{
 
 const updateCreature=(req, res)=>{
     if (req.file){
-        req.file.image=req.file.location
+        req.body.image=req.file.location
     }
     db.Creature.findByIdAndUpdate(req.params.id, req.body, {new: true}).then((updatedCreature)=>{
-        if (!updateCreature){
+        if (!updatedCreature){
             res.status(400).json({message: "Could not update"})
         }
         else{

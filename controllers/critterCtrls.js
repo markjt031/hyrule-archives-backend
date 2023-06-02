@@ -43,7 +43,7 @@ const createCritter=(req, res)=>{
 }
 const deleteCritter=(req, res)=>{
     db.Critter.findByIdAndDelete(req.params.id).then((deletedCritter=>{
-        if (!deleteCritter){
+        if (!deletedCritter){
             res.status(400).json({message: "Could not delete"})
         }
         else{
@@ -54,10 +54,10 @@ const deleteCritter=(req, res)=>{
 
 const updateCritter=(req, res)=>{
     if (req.file){
-        req.file.image=req.file.location
+        req.body.image=req.file.location
     }
     db.Critter.findByIdAndUpdate(req.params.id, req.body, {new: true}).then((updatedCritter)=>{
-        if (!updateCritter){
+        if (!updatedCritter){
             res.status(400).json({message: "Could not update"})
         }
         else{
