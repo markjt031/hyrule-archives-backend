@@ -28,6 +28,9 @@ const createEquipment=(req, res)=>{
     if (req.file){
         req.body.image=req.file.location;
     }
+    if (!req.body.no || !req.body.name){
+        res.status(400).json({message: 'could not update'})
+    }
     db.Equipment.create(req.body).then((result)=>{
         if(!result){
             res.statue(400).json({message: 'Could not create'})
@@ -55,6 +58,9 @@ const deleteEquipment=(req, res)=>{
 const updateEquipment=(req, res)=>{
     if (req.file){
         req.body.image=req.file.location
+    }
+    if (!req.body.no || !req.body.name){
+        res.status(400).json({message: 'could not update'})
     }
     db.Equipment.findByIdAndUpdate(req.params.id, req.body, {new: true}).then((updatedEquipment)=>{
         if (!updatedEquipment){

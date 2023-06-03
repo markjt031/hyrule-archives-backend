@@ -28,6 +28,9 @@ const createMonster=(req, res)=>{
     if (req.file){
         req.body.image=req.file.location;
     }
+    if (!req.body.no || !req.body.name){
+        res.status(400).json({message: 'could not update'})
+    }
     db.Monster.create(req.body).then((result)=>{
         if(!result){
             res.status(400).json({message: 'Could not create'})
@@ -55,6 +58,9 @@ const deleteMonster=(req, res)=>{
 const updateMonster=(req, res)=>{
     if (req.file){
         req.body.image=req.file.location
+    }
+    if (!req.body.no || !req.body.name){
+        res.status(400).json({message: 'could not update'})
     }
     db.Monster.findByIdAndUpdate(req.params.id, req.body, {new: true}).then((updatedMonster)=>{
         if (!updatedMonster){

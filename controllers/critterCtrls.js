@@ -28,6 +28,15 @@ const createCritter=(req, res)=>{
     if (req.file){
         req.body.image=req.file.location;
     }
+    if (!req.body.heartsRecovered){
+        req.body.heartsRecovered=0
+    }
+    if (!req.body.no || !req.body.name){
+        res.status(400).json({message: 'could not update'})
+    }
+    if (!req.body.fuseAttackPower){
+        req.body.fuseAttackPower=0;
+    }
     db.Critter.create(req.body).then((result)=>{
         if(!result){
             res.statue(400).json({message: 'Could not create'})
@@ -55,6 +64,15 @@ const deleteCritter=(req, res)=>{
 const updateCritter=(req, res)=>{
     if (req.file){
         req.body.image=req.file.location
+    }
+    if (!req.body.heartsRecovered){
+        req.body.heartsRecovered=0
+    }
+    if (!req.body.no || !req.body.name){
+        res.status(400).json({message: 'could not update'})
+    }
+    if (!req.body.fuseAttackPower){
+        req.body.fuseAttackPower=0;
     }
     db.Critter.findByIdAndUpdate(req.params.id, req.body, {new: true}).then((updatedCritter)=>{
         if (!updatedCritter){
