@@ -3,7 +3,7 @@ const mongoose=require('mongoose')
 
 
 const getAllShrines=(req, res)=>{
-    db.Shrine.find({}).sort({no: 1}).then((foundShrines)=>{
+    db.Shrine.find({}).sort({name: 1}).then((foundShrines)=>{
         if (!foundShrines){
             res.status(404).json({message: 'Shrine not found'})
         }
@@ -28,7 +28,8 @@ const createShrine=(req, res)=>{
     // req.body.userId=new mongoose.Types.ObjectId(req.body.userId)
     console.log(req.files)
     const fileArray=[]
-    if (req.files){
+    console.log(!req.files)
+    if (req.files.length>0){
         for (let i=0; i<req.files.length;i++){
             if (i===0){
                 req.body.locationImage=req.files[0].location
@@ -37,8 +38,8 @@ const createShrine=(req, res)=>{
                 fileArray[i-1]=req.files[i].location
             }
         }
+        req.body.images=fileArray
     }
-    req.body.images=fileArray
     if (!req.body.name){
         res.status(400).json({message: 'could not create'})
     }
@@ -67,12 +68,22 @@ const deleteShrine=(req, res)=>{
 }
 
 const updateShrine=(req, res)=>{
+    const fileArray=[]
+    console.log(req.body.images)
+    console.log(req.files)
     if (req.files){
         for (let i=0; i<req.files.length;i++){
-            req.body.images[i]=req.files[i].location
+            if (i===0){
+                req.body.locationImage=req.files[0].location
+            }
+            else{
+                fileArray[i-1]=req.files[i].location
+            }
         }
+        req.body.images=fileArray
     }
-    if (!req.body.no || !req.body.name){
+    
+    if (!req.body.name){
         res.status(400).json({message: 'could not update'})
     }
     db.Shrine.findByIdAndUpdate(req.params.id, req.body, {new: true}).then((updatedShrine)=>{

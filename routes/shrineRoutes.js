@@ -8,6 +8,6 @@ router.get('/', shrineCtrls.getAllShrines)
 router.get('/:id', shrineCtrls.getOneShrine)
 router.post('/', upload.any('images'), shrineCtrls.createShrine)
 router.delete('/:id', shrineCtrls.deleteShrine)
-router.put('/:id', upload.any('images'), shrineCtrls.updateShrine)
+router.put('/:id', upload.array('images'), shrineCtrls.updateShrine)
 
 module.exports = router;
