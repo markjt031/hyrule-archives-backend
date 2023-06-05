@@ -32,15 +32,13 @@ const createShrine=(req, res)=>{
 
     const fileArray=[]
     console.log(!req.files)
-
-    
-        if (req.files.length>0){
+        if (req.files){
             for (let i=0; i<req.files.length;i++){
-                if (i===0){
+                if (req.files[i].fieldname==='locationImage'){
                     req.body.locationImage=req.files[0].location
                 }
                 else{
-                    fileArray[i-1]=req.files[i].location
+                    fileArray.push(req.files[i].location)
                 }
             }
             req.body.images=fileArray
@@ -74,10 +72,10 @@ const deleteShrine=(req, res)=>{
 }
 
 const updateShrine=(req, res, next)=>{
-    // console.log(req.body)
-    console.log(req.files)
-    console.log(req.body.images)
-   
+    
+   //All of the following is to process any image uploads and change req.body to have the correct
+   //Images under the correct fieldnames. It should keep unchanged images the same and replace changed
+   //images with the file uploads
     const changedIndexArray=[]
     if (req.body.changedIndex){
         if (typeof(req.body.changedIndex)==='string'){
@@ -102,14 +100,15 @@ const updateShrine=(req, res, next)=>{
         }
         console.log(changedArray)
         if (!req.body.images){
-            console.log('not here')
             for (let i=0; i<req.files.length; i++){
                 console.log(req.files[i].fieldname)
                 if (req.files[i].fieldname==='locationImage'){
+                    console.log('changing location image')
                     req.body.locationImage=req.files[i].location
                 }
                 else {
                     imagesArray.push(req.files[i].location)
+                    console.log('replacing other images')
                 }
             }
             console.log(imagesArray)
@@ -131,9 +130,8 @@ const updateShrine=(req, res, next)=>{
             }
             for (let i=0; i<length; i++){
                 if (req.files.length>0 && req.files[0].fieldname==='locationImage'){
-                    console.log("I'm really here")
+                    console.log('changing location image')
                     req.body.locationImage=req.files.shift().location
-                    console.log(req.files)
                 }
                 else if (changedArray.includes(i)){
                     console.log('replacing image')
@@ -142,7 +140,7 @@ const updateShrine=(req, res, next)=>{
                 }
                 else if (images){
                     imagesArray.push(images.shift())
-                    console.log('old image added')
+                    console.log('old image preserved')
                 }
                 else break
                 console.log(imagesArray, i)
