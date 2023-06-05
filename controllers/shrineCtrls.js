@@ -2,6 +2,7 @@ const db=require('../models')
 const mongoose=require('mongoose')
 
 
+
 const getAllShrines=(req, res)=>{
     db.Shrine.find({}).sort({name: 1}).then((foundShrines)=>{
         if (!foundShrines){
@@ -24,22 +25,27 @@ const getOneShrine=(req, res)=>{
     })
 }
 const createShrine=(req, res)=>{
-    // req.body.userId=req.session.currentUser
-    // req.body.userId=new mongoose.Types.ObjectId(req.body.userId)
+    //req.body.userId=req.session.currentUser
+    req.body.userId=new mongoose.Types.ObjectId(req.body.userId)
+    console.log(req.body)
     console.log(req.files)
+
     const fileArray=[]
     console.log(!req.files)
-    if (req.files.length>0){
-        for (let i=0; i<req.files.length;i++){
-            if (i===0){
-                req.body.locationImage=req.files[0].location
+
+    
+        if (req.files.length>0){
+            for (let i=0; i<req.files.length;i++){
+                if (i===0){
+                    req.body.locationImage=req.files[0].location
+                }
+                else{
+                    fileArray[i-1]=req.files[i].location
+                }
             }
-            else{
-                fileArray[i-1]=req.files[i].location
-            }
+            req.body.images=fileArray
         }
-        req.body.images=fileArray
-    }
+    
     if (!req.body.name){
         res.status(400).json({message: 'could not create'})
     }
@@ -67,21 +73,85 @@ const deleteShrine=(req, res)=>{
     }))
 }
 
-const updateShrine=(req, res)=>{
-    const fileArray=[]
-    console.log(req.body.images)
+const updateShrine=(req, res, next)=>{
+    // console.log(req.body)
     console.log(req.files)
-    if (req.files){
-        for (let i=0; i<req.files.length;i++){
-            if (i===0){
-                req.body.locationImage=req.files[0].location
-            }
-            else{
-                fileArray[i-1]=req.files[i].location
+    console.log(req.body.images)
+   
+    const changedIndexArray=[]
+    if (req.body.changedIndex){
+        if (typeof(req.body.changedIndex)==='string'){
+            changedIndexArray.push(Number.parseInt(req.body.changedIndex))
+        }
+        else{
+            for (let i=0; i<req.body.changedIndex.length; i++){
+                changedIndexArray.push(Number.parseInt(req.body.changedIndex[i]))
             }
         }
-        req.body.images=fileArray
     }
+    const imagesArray=[]
+    let changedArray=[]
+    if (req.files){
+        if (changedIndexArray.length>0){
+            if (req.files[0].fieldname==='locationImage'){
+                console.log("...changing")
+                changedArray=[...changedIndexArray.map(index=>index+1)]
+            }
+            else changedArray=[...changedIndexArray]
+            
+        }
+        console.log(changedArray)
+        if (!req.body.images){
+            console.log('not here')
+            for (let i=0; i<req.files.length; i++){
+                console.log(req.files[i].fieldname)
+                if (req.files[i].fieldname==='locationImage'){
+                    req.body.locationImage=req.files[i].location
+                }
+                else {
+                    imagesArray.push(req.files[i].location)
+                }
+            }
+            console.log(imagesArray)
+            req.body.images=imagesArray
+        }
+        else{
+            let length
+            let images=[]
+            console.log('here')
+            if (typeof(req.body.images)==='string'){
+                length=1+req.files.length
+                images.push(req.body.images)
+            }
+            else{
+                length=req.files.length+req.body.images.length
+                for (let i=0; i<req.body.images.length; i++){
+                    images.push(req.body.images[i])
+                }
+            }
+            for (let i=0; i<length; i++){
+                if (req.files.length>0 && req.files[0].fieldname==='locationImage'){
+                    console.log("I'm really here")
+                    req.body.locationImage=req.files.shift().location
+                    console.log(req.files)
+                }
+                else if (changedArray.includes(i)){
+                    console.log('replacing image')
+                    imagesArray.push(req.files.shift().location)
+                    console.log(req.files)
+                }
+                else if (images){
+                    imagesArray.push(images.shift())
+                    console.log('old image added')
+                }
+                else break
+                console.log(imagesArray, i)
+            }
+            req.body.images=imagesArray
+        }
+        
+    }
+    
     
     if (!req.body.name){
         res.status(400).json({message: 'could not update'})
@@ -91,7 +161,9 @@ const updateShrine=(req, res)=>{
             res.status(400).json({message: "Could not update"})
         }
         else{
-            res.status(200).json({data: updatedShrine, message: "creature shrine"})
+            console.log(updatedShrine)
+            console.log('shrine updated')
+            res.status(200).json({data: updatedShrine, message: "updated shrine"})
         }
     })
 }
