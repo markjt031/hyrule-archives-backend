@@ -7,6 +7,7 @@ const userRoutes=require('./userRoutes')
 const critterRoutes=require('./critterRoutes')
 const searchRoutes=require('./searchRoutes')
 const shrineRoutes=require('./shrineRoutes')
+const korokRoutes=require('./korokRoutes')
 
 router.use('/creatures', creatureRoutes)
 router.use('/monsters', monsterRoutes)
@@ -16,6 +17,7 @@ router.use('/critters', critterRoutes)
 router.use('/users', userRoutes)
 router.use('/search', searchRoutes)
 router.use('/shrines', shrineRoutes)
+router.use('/koroks', korokRoutes)
 
 
 module.exports=router

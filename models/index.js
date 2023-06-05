@@ -18,5 +18,6 @@ mongoose.connect(MONGODB_URI, {
     Equipment: require('./equipment'),
     Critter: require('./critter'),
     User: require('./user'),
-    Shrine: require('./shrine')
+    Shrine: require('./shrine'),
+    Korok: require('./korok')
   }

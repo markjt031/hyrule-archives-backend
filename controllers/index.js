@@ -6,5 +6,6 @@ module.exports = {
     critterCtrls: require('./critterCtrls'),
     userCtrls: require('./userCtrls'),
     searchCtrls: require('./searchCtrl'),
-    shrineCtrls: require('./shrineCtrls')
+    shrineCtrls: require('./shrineCtrls'),
+    korokCtrls: require('./korokCrtls')
 }
