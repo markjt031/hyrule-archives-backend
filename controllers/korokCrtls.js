@@ -84,14 +84,13 @@ const deleteKorok=(req, res)=>{
 }
 
 const updateKorok=(req, res, next)=>{
+    console.log(req.files)
     if (req.files){
-        for (let i=0; i<req.files.length; i++){
-            if (req.files[i].fieldname==='locationImage'){
-                req.body.locationImage=req.files[i]
-            }
-            if (req.files[i].fieldname==='korokImage'){
-                req.body.locationsImage=req.files[i]
-            }
+        if (req.files.locationImage){
+            req.body.locationImage=req.files.locationImage[0].location
+        }
+        if (req.files.korokImage){
+            req.body.korokImage=req.files.korokImage[0].location
         }
     }
     db.Korok.findByIdAndUpdate(req.params.id, req.body, {new: true}).then((updatedKorok)=>{
@@ -101,7 +100,7 @@ const updateKorok=(req, res, next)=>{
         else{
             console.log(updatedKorok)
             console.log('korok updated')
-            res.status(200).json({data: updatedShrine, message: "updated korok"})
+            res.status(200).json({data: updatedKorok, message: "updated korok"})
         }
     })
 }

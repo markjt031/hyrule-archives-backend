@@ -10,7 +10,7 @@ router.get('/:id', korokCtrls.getOneKorok)
 
 router.post('/', upload.any('images'), korokCtrls.createKorok)
 router.delete('/:id', korokCtrls.deleteKorok)
-router.put('/:id', upload.any('images'), korokCtrls.updateKorok)
+router.put('/:id', upload.fields([{name: 'locationImage'}, {name: 'korokImage'}]), korokCtrls.updateKorok)
     
 
 module.exports = router;
