@@ -92,8 +92,10 @@ const getProfile=(req, res)=>{
                 as: "koroks"
             }
         },
+      
         {
             $project: { 
+                avatar: 1,
                 username: 1,
                 email: 1,
                 creatures: 1,
