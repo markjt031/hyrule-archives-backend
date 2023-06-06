@@ -135,11 +135,23 @@ const logout=(req, res)=>{
         res.send({message: `You have logged out`})
     })
 }
-
+const uploadAvatar=(req, res)=>{
+    if (req.file){
+    User.findOneAndUpdate({_id: req.params.id},{$set: {'avatar': req.file.location}}, {new:true}).then((updatedUser)=>{
+        if (!updatedUser){
+            res.status(400).json({message: 'could not update avatar'})
+        }
+        else{
+            res.status(200).json({data: updatedUser, message: 'avatar updated successfully'})
+        }
+    })
+    }
+}
 module.exports={
     login,
     register,
     getProfile,
     getUsers,
-    logout
+    logout,
+    uploadAvatar
 }
