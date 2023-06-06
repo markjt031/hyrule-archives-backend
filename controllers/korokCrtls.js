@@ -13,6 +13,20 @@ const getAllKoroks=(req, res)=>{
         }
     })
 }
+const filterByRegion=(req, res)=>{
+    if (req.query){
+        const region=req.query.region
+        
+        db.Korok.find({'region': {$regex: region, $options: "i"}}).then((foundKoroks)=>{
+            if (!foundKoroks){
+                res.status(404).json({message: 'Korok not found'})
+            }
+            else{
+                res.status(200).json({data: foundKoroks})
+            }
+        }).catch((err)=>console.log(err))
+    }
+}
 
 const getOneKorok=(req, res)=>{
     db.Korok.findOne({_id: req.params.id}).then((foundKorok)=>{
@@ -98,5 +112,6 @@ module.exports={
     deleteKorok,
     updateKorok,
     getAllKoroks,
-    getOneKorok
+    getOneKorok,
+    filterByRegion
 }
