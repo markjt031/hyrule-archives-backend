@@ -77,6 +77,22 @@ const getProfile=(req, res)=>{
             }
         },
         {
+            $lookup: {
+                from: "shrines",
+                localField: "_id",
+                foreignField: "userId",
+                as: "shrines"
+            }
+        },
+        {
+            $lookup: {
+                from: "koroks",
+                localField: "_id",
+                foreignField: "userId",
+                as: "koroks"
+            }
+        },
+        {
             $project: { 
                 username: 1,
                 email: 1,
@@ -84,7 +100,9 @@ const getProfile=(req, res)=>{
                 critters: 1,
                 monsters: 1,
                 equipment: 1,
-                materials: 1
+                materials: 1,
+                shrines: 1,
+                koroks: 1
                 
             }
         }
