@@ -2,9 +2,25 @@
 
 ## API
 
-This is the API used as the backend for https://hyrule-archives-frontend.vercel.app/
+This is the API used as the backend for https://hyrule-archives-frontend.vercel.app/  
+Hyrule Archives is a site for creating and posting information about The Legend of Zelda: Tears of the Kingdom.
+
+### Technologies Used
+This API uses Express.js and mongoose to interact with MongoDB. Image files are uploaded to AWS S3 with multer and multer-s3.
+
+### Dependencies
+    "aws-sdk": "^2.895.0",
+    "bcrypt": "^5.1.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "express-session": "^1.17.3",
+    "mongoose": "^7.2.0",
+    "multer": "^1.4.4",
+    "multer-s3": "^2.10.0"
 
 ### MODELS
+These are the database models used in this project. The models for creatures, critters, materials, monsters and equipment are based off the in-game information provided in the Hyrule Compendium.
 
  Creature:  
  * no: {type: Number, unique: true},  
@@ -109,43 +125,3 @@ The following GET routes can be used to retrieve information from this API. Thes
 * https://hyrule-archive.herokuapp.com/search?name=namehere --Replace namehere with the name of the item you are searching for
 * https://hyrule-archive.herokuapp.com/users/ --retrieve a list of users(id and username only)
 
-### POST Routes
-
-For post routes for critters, creatures, monsters, materials and equipment, name and no(in-game compendium number) must be unique. For shrines, name must be unique. Returns JSON of created object upon successful creation.
-
-* https://hyrule-archive.herokuapp.com/creatures --Post new creature 
-* https://hyrule-archive.herokuapp.com/critters --Post new critter
-* https://hyrule-archive.herokuapp.com/monsters --Post new monster
-* https://hyrule-archive.herokuapp.com/items/materials --Post new material
-* https://hyrule-archive.herokuapp.com/items/equipment --Post new equipment
-* https://hyrule-archive.herokuapp.com/shrines --Post new Shrines
-* https://hyrule-archive.herokuapp.com/koroks --Post new Korok
-* https://hyrule-archive.herokuapp.com/users/register --Registration for users. Username and emails are unique
-* https://hyrule-archive.herokuapp.com/users/login --Login for users. Must have accurate user credentials to login
-
-
-### PUT Routes
-
-For editing already added creatures, critters, monsters, materials, equipment, shrines, and koroks. Returns JSON of updated data if successful
-
-* https://hyrule-archive.herokuapp.com/creatures/:id --Updates creature with id matching the id
-* https://hyrule-archive.herokuapp.com/critters/:id --Updates critter with id matching the id
-* https://hyrule-archive.herokuapp.com/monsters/:id --Updates monster with id matching the id
-* https://hyrule-archive.herokuapp.com/items/materials/:id --Updates material with id matching the id
-* https://hyrule-archive.herokuapp.com/items/equipment/:id --Updates equipment with id matching the id
-* https://hyrule-archive.herokuapp.com/shrines/:id --Updates shrine with id matching the id
-* https://hyrule-archive.herokuapp.com/koroks/:id --Updates korok with id matching the id
-* https://hyrule-archive.herokuapp.com/users/profile/:id --Allows a single image to be added as an avatar to user profile
-
-
-### DELETE Routes
-
-For deleting objects by ID
-
-* https://hyrule-archive.herokuapp.com/creatures/:id --Delete creature with id matching the id
-* https://hyrule-archive.herokuapp.com/critters/:id --Deletes critter with id matching the id
-* https://hyrule-archive.herokuapp.com/monsters/:id --Deletes monster with id matching the id
-* https://hyrule-archive.herokuapp.com/items/materials/:id --Deletes material with id matching the id
-* https://hyrule-archive.herokuapp.com/items/equipment/:id --Deletes equipment with id matching the id
-* https://hyrule-archive.herokuapp.com/shrines/:id --Deletes shrine with id matching the id
-* https://hyrule-archive.herokuapp.com/koroks/:id --Deletes korok with id matching the id
