@@ -34,7 +34,7 @@ const createCreature=(req, res)=>{
     }
     db.Creature.create(req.body).then((result)=>{
         if(!result){
-            res.statue(400).json({message: 'Could not create'})
+            res.status(400).json({message: 'Could not create'})
         }
         else{
             console.log(result)
