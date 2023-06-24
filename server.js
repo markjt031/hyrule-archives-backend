@@ -8,7 +8,7 @@ const cors = require("cors")
 const PORT=process.env.PORT
 
 const corsOptions ={
-    origin: ['https://hyrule-archives-frontend.vercel.app'],
+    origin: ['https://hyrule-archives-frontend.vercel.app', 'http://localhost:3000'],
     credentials:true,            
     optionSuccessStatus:200
 }

@@ -88,69 +88,51 @@ const updateShrine=(req, res, next)=>{
         }
     }
     const imagesArray=[]
-    let changedArray=[]
+    
     if (req.files){
-        if (changedIndexArray.length>0){
-            if (req.files[0].fieldname==='locationImage'){
-                console.log("...changing")
-                changedArray=[...changedIndexArray.map(index=>index+1)]
-            }
-            else changedArray=[...changedIndexArray]
-            
+        
+        if (req.files.locationImage){
+            req.body.locationImage=req.files.locationImage[0].location
         }
-        console.log(changedArray)
         if (!req.body.images){
-            for (let i=0; i<req.files.length; i++){
-                console.log(req.files[i].fieldname)
-                if (req.files[i].fieldname==='locationImage'){
-                    console.log('changing location image')
-                    req.body.locationImage=req.files[i].location
-                }
-                else {
-                    imagesArray.push(req.files[i].location)
-                    console.log('replacing other images')
-                }
+            for (let i=0; i<req.files.imageFiles.length; i++){
+                imagesArray.push(req.files.imageFiles[i].location)
+                console.log('replacing other images')
             }
-            console.log(imagesArray)
             req.body.images=imagesArray
         }
         else{
-            let length
             let images=[]
-            console.log('here')
+            let length;
+            //A single image is unchanged, form data passed as string.
             if (typeof(req.body.images)==='string'){
-                length=1+req.files.length
                 images.push(req.body.images)
             }
             else{
-                length=req.files.length+req.body.images.length
                 for (let i=0; i<req.body.images.length; i++){
-                    images.push(req.body.images[i])
-                }
+                    images.push(req.body.images[i])  
+                } 
+            }
+            if (req.files.imageFiles){
+                length=req.files.imageFiles.length+images.length;
+            }
+            else{
+                length=images.length
             }
             for (let i=0; i<length; i++){
-                if (req.files.length>0 && req.files[0].fieldname==='locationImage'){
-                    console.log('changing location image')
-                    req.body.locationImage=req.files.shift().location
-                }
-                else if (changedArray.includes(i)){
+                if (changedIndexArray.includes(i)){
                     console.log('replacing image')
-                    imagesArray.push(req.files.shift().location)
-                    console.log(req.files)
+                    imagesArray.push(req.files.imageFiles.shift().location)
                 }
                 else if (images){
                     imagesArray.push(images.shift())
                     console.log('old image preserved')
                 }
                 else break
-                console.log(imagesArray, i)
             }
             req.body.images=imagesArray
         }
-        
     }
-    
-    
     if (!req.body.name){
         res.status(400).json({message: 'could not update'})
     }
